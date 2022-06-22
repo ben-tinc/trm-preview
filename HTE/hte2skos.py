@@ -121,8 +121,6 @@ def convert(df):
     * prefLabel (preferred label of the concept)
     * concat (the corresponding path in the full HTE hierarchy)
     '''
-    new_id = _generate_new_trmid(df)
-
     graph = Graph()
     ns = Namespace(URI_PREFIX)
 
@@ -151,7 +149,11 @@ def convert(df):
 def determine_parent(df, row):
     '''Check if there is a parent category, and if so, what its URL would be.
     
-    
+    This is pretty slow, but unfortunately we cannot simply assume that
+    concepts which are deeper in the hierarchy have a parent concept which
+    actually exists inside the TC.
+    See https://git.noc.ruhr-uni-bochum.de/sfb1475-inf/TRM/-/issues/5 for
+    further info.
     '''
     path = row.loc[['AS1', 'S2', 'S3', 'S4', 'S5']]
     path = path[path.notnull()]
