@@ -111,10 +111,10 @@ def build_hte_url(row):
     return None
 
 
-def convert(df):
+def convert(df, exclude_hte_path, exclude_tc_path):
     '''Take dataframe and express its information as SKOS.
-    
-    It expects the following columns to be present:
+
+    It expects the following columns to be present in the dataframe:
     * hte_url (the UID of the concept)
     * signature (the path of the concept)
     * broader (UID of the broader concept)
@@ -135,9 +135,11 @@ def convert(df):
         concept = URIRef(build_concept_uri(row['trmid']))
         graph.add((concept, RDF.type, SKOS.Concept))
         graph.add((concept, SKOS.prefLabel, Literal(row['prefLabel'], lang='en')))
-        graph.add((concept, SKOS.notation, Literal(row['signature'], datatype=ns.TCPath)))
+
+        if not exclude_tc_path:
+            graph.add((concept, SKOS.notation, Literal(row['signature'], datatype=ns.TCPath)))
         
-        if row['concat'] and row['concat'] != 'nan':
+        if row['concat'] and row['concat'] != 'nan' and not exclude_hte_path:
             graph.add((concept, SKOS.notation, Literal(row['concat'], datatype=ns.HTEPath)))
 
         if row['broader'] and row['broader'] is not np.NaN:
@@ -198,24 +200,24 @@ def main(config):
     df = read(config.infile)
     df = prepare(df)
     write_prepared(df, config.prepared)
-    graph = convert(df)
+    graph = convert(df, exclude_hte_path=config.no_hte_notation, exclude_tc_path=config.no_tc_notation)
     write_intermediate(graph, config.intermediate)
 
 
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description='Convert HTE data from .xlsx file to SKOS and enhance it with skosify.')
     p.add_argument('infile', type=Path, default=HTE_PATH, nargs='?',
-        help='path to the .xlsx file which contains the HTE data'
-    )
+        help='path to the .xlsx file which contains the HTE data')
     p.add_argument('-p', '--prepared', type=Path, default=CLEAN_PATH,
-        help='path where the cleaned up .xlsx file should be written'
-    )
+        help='path where the cleaned up .xlsx file should be written')
     p.add_argument('-i', '--intermediate', type=Path, default=INTER_PATH,
-        help='path where the intermediate SKOS ttl file should be written'
-    )
+        help='path where the intermediate SKOS ttl file should be written')
     p.add_argument('-o', '--output', type=Path, default=RESULT_PATH,
-        help='path where the final "skosified" SKOS ttl file should be written'
-    )
+        help='path where the final "skosified" SKOS ttl file should be written')
+    p.add_argument('--no-hte-notation', default=False, action='store_true',
+        help='if set, HTE path is not included as skos:notation')
+    p.add_argument('--no-tc-notation', default=False, action='store_true',
+        help='if set, TC path is not included as skos:notation')
 
     args = p.parse_args()
     main(args)
