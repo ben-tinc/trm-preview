@@ -28,9 +28,9 @@ CONCEPT_SCHEME = f'{URI_PREFIX}conceptSchemes/TRMBase'
 
 PROJECT_PATH = Path(__file__).parent
 HTE_PATH = PROJECT_PATH / 'Media_405073_smxx.xlsx'
-CLEAN_PATH = PROJECT_PATH / 'prepared_hte_data.xlsx'
-INTER_PATH = PROJECT_PATH / 'intermediate_hte_data.ttl'
-RESULT_PATH = PROJECT_PATH / 'hte_data.ttl'
+CLEAN_PATH = PROJECT_PATH / 'results' / 'prepared_hte_data.xlsx'
+INTER_PATH = PROJECT_PATH / 'results' / 'intermediate_hte_data.ttl'
+RESULT_PATH = PROJECT_PATH / 'results' / 'hte_data.ttl'
 
 FIXTURES = {
     50: '238078',       # Asia, 01.01.06.02
@@ -41,12 +41,6 @@ FIXTURES = {
     #2023: '127644',     # Emotions, mood
 }
     
-
-def read(path=HTE_PATH):
-    '''Read spreadsheet file and parse it into dataframe.'''
-    df = pd.read_excel(path, dtype=str)
-    return df
-
 
 def prepare(df):
     '''Clean data up and create derived data columns.'''
@@ -186,22 +180,21 @@ def _generate_new_trmid(df, starting=None):
         yield str(maxid)
 
 
-def write_prepared(df, filename=CLEAN_PATH):
-    '''Write prepared HTE data to another spreadsheet file.'''
-    df.to_excel(filename)
-
-
-def write_intermediate(graph, filename=INTER_PATH):
-    '''Write intermediate SKOS graph to turtle file.'''
-    graph.serialize(filename, encoding='utf8')
+def skosify_graph(g):
+    '''Check and enhance the SKOS graph using the skosify library.'''
+    cfg = skosify.config('skosify_hte.cfg')
+    voc = skosify.skosify(g, **cfg)
+    return voc
 
 
 def main(config):
-    df = read(config.infile)
+    df = pd.read_excel(config.infile, dtype=str)
     df = prepare(df)
-    write_prepared(df, config.prepared)
+    df.to_excel(config.prepared)
     graph = convert(df, exclude_hte_path=config.no_hte_notation, exclude_tc_path=config.no_tc_notation)
-    write_intermediate(graph, config.intermediate)
+    graph.serialize(config.intermediate, encoding='utf8', format='ttl')
+    graph = skosify_graph(graph)
+    graph.serialize(config.output, encoding='utf8', format='ttl')
 
 
 if __name__ == '__main__':
