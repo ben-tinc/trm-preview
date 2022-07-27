@@ -1,8 +1,3 @@
-# TRM
-## Thesaurus of Religious Metaphors
-
-
-
 ## TOC
 
 
