@@ -6,3 +6,28 @@
 p.tiny {
     font-size: 16px;
 }
+
+.reveal p img,
+.reveal figure {
+    max-width: 80%;
+    max-height: 80%;
+}
+
+.reveal figure {
+    margin: 0 auto;
+}
+
+.reveal figure img {
+    margin-bottom: 3px;
+}
+
+figcaption,
+figcaption a {
+    font-style: italic;
+    font-size: 90%;
+}
+
+.graphic p,
+.graphic img {
+    margin-top: 0;
+} 

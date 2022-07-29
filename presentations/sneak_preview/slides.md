@@ -1,10 +1,22 @@
 ## TOC
 
+* Definition: ”Thesauri“
+* HTE as a basis
+* Data Model
+* Current State
+* Challenges
+* The Way Forward
+
 
 
 ## Introduction
 
 * Thesaurus vs controlled vocabulary, taxonomy, ontology etc.
+
+<figure>
+<img alt="comparison of thesaurus to other types of controlled vocabularies" src="./img/Controlled-vocabulary-types-chart-thesauri.png">
+<figcaption>Source: <a href="https://www.hedden-information.com/what-is-a-thesaurus-and-what-is-it-good-for/">https://www.hedden-information.com/what-is-a-thesaurus-and-what-is-it-good-for/</a>.</figcaption>
+</figure>
 
 
 
@@ -26,15 +38,16 @@
 ### Access to HTE (cont.)
 
 * two different sets of categories
-  * full HTE set, e.g. '01.02.04': "foo" (~144,000 concepts)
-  * thematic category set (TC), e.g. 'A01c': "foo" (4,033 concepts)
+  * full HTE set, e.g. '01.04.02': "Anthropocentrism" (~144,000 concepts)
+  * thematic category set (TC), e.g. 'AD01': "Science of mankind" (4,033 concepts)
   * TC is supposed to be used for human queries and visualizations; it is not as readily accessible via the website
 * we _only_ have access to the taxonomy data, and _only_ of the TC set!
 
 
-### TC overview
+<!-- .slide: data-background-iframe="https://ht.ac.uk/category/#id=39622" -->
 
---> show SKOSMOS
+Notes: The TC mapping is not easily searchable in the web interface, but it is visible by using the detail view of a full HTE category.
+While in theory the TC set of categories seems like a good fit for our project, in practice I found it to be _weird_. TODO: show cases of weirdness!
 
 
 
@@ -43,13 +56,29 @@
 
 ### SKOS
 
-* based on "concepts", identified by URIs
-* concepts get various kinds of "labels" in different languages, e.g. "Love"@en
-* concepts get connected by hierarchical relations like "narrower", "broader" to form a taxonomy (directed graph, not a tree)
-* concepts get connected by non-hierarchical relations to express mappings, e.g. "broadMatch"
-* concepts can have "notations" to model traditional signatures e.g. "01.04.02"
-* basically everything can have notes attached to it
+<div style="display: grid; grid-template-columns: 1fr 1fr;">
+<div class="list">
+<ul>
+<li class="fragment" data-fragment-index="1">based on <b>concepts</b>, identified by URIs</li> 
+<li class="fragment" data-fragment-index="2">concepts get various kinds of <b>labels</b> in different languages, e.g. <em>"Love"@en</em></li>
+<li class="fragment" data-fragment-index="3">concepts get connected by <b>hierarchical relations</b> like <em>"narrower"</em> to form a taxonomy (directed graph, not a tree)</li>
+<li class="fragment" data-fragment-index="4">concepts get connected by <b>non-hierarchical relations</b> to express mappings, e.g. <em>"closeMatch"</em></li>
+<li class="fragment" data-fragment-index="5">concepts can have <b>notations</b> to model traditional signatures e.g. <em>"01.04.02"</em></li>
+<li class="fragment" data-fragment-index="6">basically everything can have <b>notes</b> attached to it</li>
+</ul>
+</div>
+<div class="graphic">
+<div class="r-stack">
+  <img alt="SKOS Concepts" src="./img/skos-model-1.png" class="fragment" data-fragment-index="1"/>
+  <img alt="SKOS Labels" src="./img/skos-model-2.png" class="fragment" data-fragment-index="2"/>
+  <img alt="SKOS Hierarchy" src="./img/skos-model-3.png" class="fragment" data-fragment-index="3"/>
+  <img alt="SKOS Mappings" src="./img/skos-model-4.png" class="fragment" data-fragment-index="4"/>
+  <img alt="SKOS Notations" src="./img/skos-model-5.png" class="fragment" data-fragment-index="5"/>
+</div>
+</div>
+</div>
 
+Notes: We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. The TC concept "AU":"Emotion" is not mapped by the HTE editors.
 
 
 ## Current State
@@ -89,3 +118,8 @@
 * Modelling / Extension
 * Organizational
 * Connection to textual sources
+
+
+
+## The Way Forward
+
