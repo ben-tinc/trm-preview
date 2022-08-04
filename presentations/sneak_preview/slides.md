@@ -1,11 +1,13 @@
 ## TOC
 
-* Definition: ”Thesauri“
-* HTE as a basis
-* Data Model
-* Current State
-* Challenges
-* The Way Forward
+* Introduction: Definition of ”Thesaurus“
+* Historical Thesaurus of English as a basis <!-- .element class="fragment"  -->
+* Data Model <!-- .element class="fragment"  -->
+* Current State <!-- .element class="fragment"  -->
+* Challenges (as I see them) <!-- .element class="fragment"  -->
+* The Way Forward <!-- .element class="fragment"  -->
+
+Notes: Ich glaube, dass der Thesaurus ein spannendes, und auch in gewisser Hinsicht dankbares Puzzlestein für Mitglieder des SFB ist. Spannend, weil es eine ganze Reihe von Herausforderungen gibt, und dankbar insofern, als diese Herausforderungen nicht in erster Linie technischer, sondern inhaltlicher Natur sind. Im Umkehrschluss heißt das auch: viele dieser Herausforderungen müssen mittels der Expertise der verschiedenen Unterprojekte angegangen werden. Dazu möchte ich gerne einladen und ermutigen, und um das zu ermöglichen möchte ich hier einen Überblick geben. 
 
 
 
@@ -18,36 +20,47 @@
 <figcaption>Source: <a href="https://www.hedden-information.com/what-is-a-thesaurus-and-what-is-it-good-for/">https://www.hedden-information.com/what-is-a-thesaurus-and-what-is-it-good-for/</a>.</figcaption>
 </figure>
 
+Notes: Das Wort "Thesaurus" hat fach- und kontextabhängig unterschiedliche Bedeutungen. Und selbst innerhalb des SFB sprechen wir über zwei unterschiedliche Dinge jeweils als Thesaurus:
+1. Thesaurus im weiteren Sinne: das Gesamtsystem, das Konzepte mit Textstellen verknüpft, und auch den Zugang dazu ermöglicht.
+2. Thesaurus im technischen (Information Retrieval) Sinne: ein Spezialfall eines kontrollierten Vokabulars, dass im Grunde eine Konzepthierarchie modelliert. 
+In erster Linie geht es heute um die zweite Definition, auch wenn die Motivation und das Ziel des Ganzen natürlich ein System im ersten Sinne ist.
 
 
-## HTE as basis (?)
 
-* project of the University of Glasgow
-* Website: HTE, based on ODE
-* specific for English language (but _various kinds_ of English)
-* combines rich taxonomy with concrete utterances from ODE
+## Historical Thesaurus of English
 
+* project of the University of Glasgow  <!-- .element class="fragment"  -->
+* Website: HTE, based on ODE  <!-- .element class="fragment"  -->
+* specific for English language (but various kinds of English)  <!-- .element class="fragment"  -->
+* combines rich taxonomy with concrete utterances from ODE  <!-- .element class="fragment"  -->
 
-### Access to HTE
-
-* not Open Access
-* no API (except crawling the website)
-* agreement on re-use
+Notes: Schon von Beginn an wurde entschieden, dass der TRM nicht bei Null anfangen, sondern auf dem HTE aufbauen sollte. Wichtig ist dabei, dass
+1. HTE eigentlich ein T im ersten Sinne ist, und
+2. gerade deshalb unser Zugang leider sehr eingeschränkt ist.
 
 
-### Access to HTE (cont.)
+### Access to the HTE
 
-* two different sets of categories
+* not Open Access  <!-- .element class="fragment"  -->
+* no API (except crawling the website)  <!-- .element class="fragment"  -->
+* agreement on re-use, BUT…  <!-- .element class="fragment"  -->
+
+
+### Access to the HTE (cont.)
+
+* we only have access to the taxonomy data <!-- .element class="fragment"  -->
+* two different sets of categories  <!-- .element class="fragment"  -->
   * full HTE set, e.g. '01.04.02': "Anthropocentrism" (~144,000 concepts)
   * thematic category set (TC), e.g. 'AD01': "Science of mankind" (4,033 concepts)
   * TC is supposed to be used for human queries and visualizations; it is not as readily accessible via the website
-* we _only_ have access to the taxonomy data, and _only_ of the TC set!
+* we only have access to the TC set!  <!-- .element class="fragment"  -->
 
 
 <!-- .slide: data-background-iframe="https://ht.ac.uk/category/#id=39622" -->
 
 Notes: The TC mapping is not easily searchable in the web interface, but it is visible by using the detail view of a full HTE category.
-While in theory the TC set of categories seems like a good fit for our project, in practice I found it to be _weird_. TODO: show cases of weirdness!
+While in theory the TC set of categories seems like a good fit for our project, in practice I found it to be _weird_. We will see some of the weirdness
+when I give you a quick glance on what we currently have.
 
 
 
@@ -78,7 +91,10 @@ While in theory the TC set of categories seems like a good fit for our project, 
 </div>
 </div>
 
-Notes: We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. The TC concept "AU":"Emotion" is not mapped by the HTE editors.
+Notes: Bevor ich den aktuellen Stand zeige, ganz kurz ein technischer Exkurs. Unser Thesaurus (im IR Sinne) war ja zunächst ein Datensatz. Dieser hat eine recht simple Struktur, die dem SKOS Modell folgt.
+SKOS ("Simple Knowledge Organization System") ist eine _W3C recommendation_ und erlaubt uns, anders als die HTE, anschlussfähig für verschiedene eigene Frontends zu sein, aber auch an weitere, externe Knowledge Graphs.
+We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. (Aside: the TC concept "AU":"Emotion" is not mapped by the HTE editors.)
+
 
 
 ## Current State
@@ -98,6 +114,11 @@ Notes: We see that while "Emotion" is parent of "Love" in HTE, in TC they are si
   * AA: "world"
   * AR: "mind"
   * AY: "society"
+* the layer of a concept inside the hierarchy is not meaningful 
+
+Notes: (e.g. Concept path 'AC01' suggests that 'AC' should exist, but it doesn't.
+Concept path 'AC02' suggests that 'AC' should exist, but it doesn't.
+Concept path 'AP03c05a' suggests that 'AP03c05' should exist, but it doesn't.)
 
 
 ### Editable
@@ -107,19 +128,31 @@ Notes: We see that while "Emotion" is parent of "Love" in HTE, in TC they are si
 * vocabseditor?
 * other…?
 
+Notes: Selbst wenn wir mit dem Zustand des TC zufrieden wären, benutzen wir andere Sprachen als Englisch. Wir müssen also diese Hierarchie weiterentwickeln, und da wird es eigentlich erst wirklich spannend.
+
 
 
 ## Challenges
-#### (as I see it…)
+#### (as I see them…)
 
 
 ### Challenges
 
-* Modelling / Extension
-* Organizational
-* Connection to textual sources
+* Modelling / Extension  <!-- .element class="fragment"  -->
+* Organizational  <!-- .element class="fragment"  -->
+* Connection to textual sources  <!-- .element class="fragment"  -->
+
+Notes: Drei Gebiete: erstens soll die Struktur angemessen sein für unsere Daten. Wir werden sie also erweitern müssen, und die Frage ist: wie genau?
+Zweitens die organisatorische Frage, _wer_ soll das tun? Wann? Wie häufig? Am Ende ist ein Thesaurus eine _Referenz_, eine gewisse Stabilität muss gewährleistet sein. Außerdem erfordert die Arbeit am Graphen ein gewisses Hintergrundwissen.
+Drittens: Der Thesaurus soll Dinge erschließen, also auffindbar und nutzbar machen. Inwiefern? In welcher Form?
 
 
 
 ## The Way Forward
+
+* SIG "TRM"!
+* Modelling Case Studies
+* Use Case Studies
+
+Notes: Wie ich schon erwähnt habe: über die angemessene Struktur, die notwendigen Eigenschaften, und letztendlich den Inhalt des TRM können wir nur über die Kompetenz der Unterprojekte angemessen entscheiden. 
 
