@@ -1,8 +1,8 @@
 ## TOC
 
 * Introduction: Definition of ”Thesaurus“
-* Historical Thesaurus of English as a basis <!-- .element class="fragment"  -->
 * Data Model <!-- .element class="fragment"  -->
+* Historical Thesaurus of English as a basis <!-- .element class="fragment"  -->
 * Current State <!-- .element class="fragment"  -->
 * Challenges (as I see them) <!-- .element class="fragment"  -->
 * The Way Forward <!-- .element class="fragment"  -->
@@ -24,6 +24,39 @@ Notes: Das Wort "Thesaurus" hat fach- und kontextabhängig unterschiedliche Bede
 1. Thesaurus im weiteren Sinne: das Gesamtsystem, das Konzepte mit Textstellen verknüpft, und auch den Zugang dazu ermöglicht.
 2. Thesaurus im technischen (Information Retrieval) Sinne: ein Spezialfall eines kontrollierten Vokabulars, dass im Grunde eine Konzepthierarchie modelliert. 
 In erster Linie geht es heute um die zweite Definition, auch wenn die Motivation und das Ziel des Ganzen natürlich ein System im ersten Sinne ist.
+
+
+
+## Data Model
+
+
+### SKOS
+
+<div style="display: grid; grid-template-columns: 1fr 1fr;">
+<div class="list">
+<ul>
+<li class="fragment" data-fragment-index="1">based on <b>concepts</b>, identified by URIs</li> 
+<li class="fragment" data-fragment-index="2">concepts get various kinds of <b>labels</b> in different languages, e.g. <em>"Love"@en</em></li>
+<li class="fragment" data-fragment-index="3">concepts get connected by <b>hierarchical relations</b> like <em>"narrower"</em> to form a taxonomy (directed graph, not a tree)</li>
+<li class="fragment" data-fragment-index="4">concepts get connected by <b>non-hierarchical relations</b> to express mappings, e.g. <em>"closeMatch"</em></li>
+<li class="fragment" data-fragment-index="5">concepts can have <b>notations</b> to model traditional signatures e.g. <em>"01.04.02"</em></li>
+<li class="fragment" data-fragment-index="6">basically everything can have <b>notes</b> attached to it</li>
+</ul>
+</div>
+<div class="graphic">
+<div class="r-stack">
+  <img alt="SKOS Concepts" src="./img/skos-model-1.png" class="fragment" data-fragment-index="1"/>
+  <img alt="SKOS Labels" src="./img/skos-model-2.png" class="fragment" data-fragment-index="2"/>
+  <img alt="SKOS Hierarchy" src="./img/skos-model-3.png" class="fragment" data-fragment-index="3"/>
+  <img alt="SKOS Mappings" src="./img/skos-model-4.png" class="fragment" data-fragment-index="4"/>
+  <img alt="SKOS Notations" src="./img/skos-model-5.png" class="fragment" data-fragment-index="5"/>
+</div>
+</div>
+</div>
+
+Notes: Bevor ich den aktuellen Stand zeige, ganz kurz ein technischer Exkurs. Unser Thesaurus (im IR Sinne) war ja zunächst ein Datensatz. Dieser hat eine recht simple Struktur, die dem SKOS Modell folgt.
+SKOS ("Simple Knowledge Organization System") ist eine _W3C recommendation_ und erlaubt uns, anders als die HTE, anschlussfähig für verschiedene eigene Frontends zu sein, aber auch an weitere, externe Knowledge Graphs.
+We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. (Aside: the TC concept "AU":"Emotion" is not mapped by the HTE editors.)
 
 
 
@@ -61,39 +94,6 @@ Notes: Schon von Beginn an wurde entschieden, dass der TRM nicht bei Null anfang
 Notes: The TC mapping is not easily searchable in the web interface, but it is visible by using the detail view of a full HTE category.
 While in theory the TC set of categories seems like a good fit for our project, in practice I found it to be _weird_. We will see some of the weirdness
 when I give you a quick glance on what we currently have.
-
-
-
-## Data Model
-
-
-### SKOS
-
-<div style="display: grid; grid-template-columns: 1fr 1fr;">
-<div class="list">
-<ul>
-<li class="fragment" data-fragment-index="1">based on <b>concepts</b>, identified by URIs</li> 
-<li class="fragment" data-fragment-index="2">concepts get various kinds of <b>labels</b> in different languages, e.g. <em>"Love"@en</em></li>
-<li class="fragment" data-fragment-index="3">concepts get connected by <b>hierarchical relations</b> like <em>"narrower"</em> to form a taxonomy (directed graph, not a tree)</li>
-<li class="fragment" data-fragment-index="4">concepts get connected by <b>non-hierarchical relations</b> to express mappings, e.g. <em>"closeMatch"</em></li>
-<li class="fragment" data-fragment-index="5">concepts can have <b>notations</b> to model traditional signatures e.g. <em>"01.04.02"</em></li>
-<li class="fragment" data-fragment-index="6">basically everything can have <b>notes</b> attached to it</li>
-</ul>
-</div>
-<div class="graphic">
-<div class="r-stack">
-  <img alt="SKOS Concepts" src="./img/skos-model-1.png" class="fragment" data-fragment-index="1"/>
-  <img alt="SKOS Labels" src="./img/skos-model-2.png" class="fragment" data-fragment-index="2"/>
-  <img alt="SKOS Hierarchy" src="./img/skos-model-3.png" class="fragment" data-fragment-index="3"/>
-  <img alt="SKOS Mappings" src="./img/skos-model-4.png" class="fragment" data-fragment-index="4"/>
-  <img alt="SKOS Notations" src="./img/skos-model-5.png" class="fragment" data-fragment-index="5"/>
-</div>
-</div>
-</div>
-
-Notes: Bevor ich den aktuellen Stand zeige, ganz kurz ein technischer Exkurs. Unser Thesaurus (im IR Sinne) war ja zunächst ein Datensatz. Dieser hat eine recht simple Struktur, die dem SKOS Modell folgt.
-SKOS ("Simple Knowledge Organization System") ist eine _W3C recommendation_ und erlaubt uns, anders als die HTE, anschlussfähig für verschiedene eigene Frontends zu sein, aber auch an weitere, externe Knowledge Graphs.
-We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. (Aside: the TC concept "AU":"Emotion" is not mapped by the HTE editors.)
 
 
 
