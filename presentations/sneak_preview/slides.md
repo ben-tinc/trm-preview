@@ -106,6 +106,12 @@ when I give you a quick glance on what we currently have.
 * Skosmos instance available
 
 
+<!-- .slide: data--background-iframe="http://locahost/Skosmos/en/" -->
+
+Notes: Übersicht über toplevel Konzepte. Beispielhafter Eintrag. TODO: ändern zu public Skosmos instance.
+
+
+
 ### we see that
 
 * there are many "top-level" concepts
