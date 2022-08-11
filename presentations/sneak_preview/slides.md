@@ -63,9 +63,9 @@ We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling e
 ## Historical Thesaurus of English
 
 * project of the University of Glasgow  <!-- .element class="fragment"  -->
-* Website: HTE, based on ODE  <!-- .element class="fragment"  -->
+* Website: HTE, based on OED  <!-- .element class="fragment"  -->
 * specific for English language (but various kinds of English)  <!-- .element class="fragment"  -->
-* combines rich taxonomy with concrete utterances from ODE  <!-- .element class="fragment"  -->
+* combines rich taxonomy with concrete utterances from OED  <!-- .element class="fragment"  -->
 
 Notes: Schon von Beginn an wurde entschieden, dass der TRM nicht bei Null anfangen, sondern auf dem HTE aufbauen sollte. Wichtig ist dabei, dass
 1. HTE eigentlich ein T im ersten Sinne ist, und
