@@ -31,3 +31,15 @@ figcaption a {
 .graphic img {
     margin-top: 0;
 } 
+
+.reveal .slide-number {
+    right: 127px;
+    bottom: 46px;
+    font-size: 22px;
+    color: #000;
+    background: none;
+}
+
+.reveal .slide-number-delimiter {
+    margin: 0 0px;
+}

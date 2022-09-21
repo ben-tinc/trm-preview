@@ -56,7 +56,7 @@ In erster Linie geht es heute um die zweite Definition, auch wenn die Motivation
 
 Notes: Bevor ich den aktuellen Stand zeige, ganz kurz ein technischer Exkurs. Unser Thesaurus (im IR Sinne) war ja zunächst ein Datensatz. Dieser hat eine recht simple Struktur, die dem SKOS Modell folgt.
 SKOS ("Simple Knowledge Organization System") ist eine _W3C recommendation_ und erlaubt uns, anders als die HTE, anschlussfähig für verschiedene eigene Frontends zu sein, aber auch an weitere, externe Knowledge Graphs.
-We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. (Aside: the TC concept "AU":"Emotion" is not mapped by the HTE editors.)
+We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. (Aside: the TC concept "AU":"Emotion" is not mapped by the HTE editors.) Alle diese Elemente werden wir später noch in Aktion sehen.
 
 
 
@@ -106,9 +106,9 @@ when I give you a quick glance on what we currently have.
 * Skosmos instance available
 
 
-<!-- .slide: data--background-iframe="http://locahost/Skosmos/en/" -->
+<!-- .slide: data--background-iframe="http://eris.vm.rub.de/Skosmos/en/" -->
 
-Notes: Übersicht über toplevel Konzepte. Beispielhafter Eintrag. TODO: ändern zu public Skosmos instance.
+Notes: Übersicht über toplevel Konzepte. Beispielhafter Eintrag.
 
 
 
