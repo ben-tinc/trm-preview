@@ -7,7 +7,7 @@
 * Challenges (as I see them) <!-- .element class="fragment"  -->
 * The Way Forward <!-- .element class="fragment"  -->
 
-Notes: Ich glaube, dass der Thesaurus ein spannendes, und auch in gewisser Hinsicht dankbares Puzzlestein für Mitglieder des SFB ist. Spannend, weil es eine ganze Reihe von Herausforderungen gibt, und dankbar insofern, als diese Herausforderungen nicht in erster Linie technischer, sondern inhaltlicher Natur sind. Im Umkehrschluss heißt das auch: viele dieser Herausforderungen müssen mittels der Expertise der verschiedenen Unterprojekte angegangen werden. Dazu möchte ich gerne einladen und ermutigen, und um das zu ermöglichen möchte ich hier einen Überblick geben. 
+Notes: Eine kurze Anmerkung, warum ich diese Einführung überhaupt gebe. Ich glaube, dass der Thesaurus ein spannendes, und auch in gewisser Hinsicht dankbares Puzzlestein für Mitglieder des SFB ist. Spannend, weil es eine ganze Reihe von Herausforderungen gibt, und dankbar insofern, als diese Herausforderungen nicht in erster Linie technischer, sondern inhaltlicher Natur sind. Im Umkehrschluss heißt das auch, was im Grunde immer gilt, gilt hier ganz besonders: viele dieser Herausforderungen müssen mittels der Expertise der verschiedenen Unterprojekte angegangen werden. Dazu möchte ich gerne einladen und ermutigen, und um das zu ermöglichen möchte ich hier einen Überblick geben. 
 
 
 
@@ -20,7 +20,7 @@ Notes: Ich glaube, dass der Thesaurus ein spannendes, und auch in gewisser Hinsi
 <figcaption>Source: <a href="https://www.hedden-information.com/what-is-a-thesaurus-and-what-is-it-good-for/">https://www.hedden-information.com/what-is-a-thesaurus-and-what-is-it-good-for/</a>.</figcaption>
 </figure>
 
-Notes: Das Wort "Thesaurus" hat fach- und kontextabhängig unterschiedliche Bedeutungen. Und selbst innerhalb des SFB sprechen wir über zwei unterschiedliche Dinge jeweils als Thesaurus:
+Notes: Das Wort "Thesaurus" hat fach- und kontextabhängig unterschiedliche Bedeutungen. Im Alltag ist mit Thesaurus oft ein Wörterbuch mit Synonymen gemeint. Aber selbst innerhalb des SFB sprechen wir über (mindestens) zwei unterschiedliche Dinge jeweils als Thesaurus:
 1. Thesaurus im weiteren Sinne: das Gesamtsystem, das Konzepte mit Textstellen verknüpft, und auch den Zugang dazu ermöglicht.
 2. Thesaurus im technischen (Information Retrieval) Sinne: ein Spezialfall eines kontrollierten Vokabulars, dass im Grunde eine Konzepthierarchie modelliert. 
 In erster Linie geht es heute um die zweite Definition, auch wenn die Motivation und das Ziel des Ganzen natürlich ein System im ersten Sinne ist.
@@ -54,9 +54,9 @@ In erster Linie geht es heute um die zweite Definition, auch wenn die Motivation
 </div>
 </div>
 
-Notes: Bevor ich den aktuellen Stand zeige, ganz kurz ein technischer Exkurs. Unser Thesaurus (im IR Sinne) war ja zunächst ein Datensatz. Dieser hat eine recht simple Struktur, die dem SKOS Modell folgt.
+Notes: Bevor ich den aktuellen Stand zeige, ganz kurz ein technischer Exkurs. Welche Strukturen haben wir, um unseren Thesaurus anzulegen? Was ist sozusagen das kontrollierte Vokabular für unser kontrolliertes Vokabular. Unser Thesaurus (im IR Sinne) war ja zunächst ein Datensatz. Dieser hat eine recht simple Struktur, die dem SKOS Modell folgt.
 SKOS ("Simple Knowledge Organization System") ist eine _W3C recommendation_ und erlaubt uns, anders als die HTE, anschlussfähig für verschiedene eigene Frontends zu sein, aber auch an weitere, externe Knowledge Graphs.
-We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. (Aside: the TC concept "AU":"Emotion" is not mapped by the HTE editors.) Alle diese Elemente werden wir später noch in Aktion sehen.
+We see that while "Emotion" is parent of "Love" in HTE, in TC they are sibling elements. (Aside: the TC concept "AU":"Emotion" is not mapped by the HTE editors.) Alle diese Elemente werden wir später noch in Aktion sehen. Ein wichtiges Detail: Die Konzepte sind nicht ihre Labels!
 
 
 
@@ -72,11 +72,29 @@ Notes: Schon von Beginn an wurde entschieden, dass der TRM nicht bei Null anfang
 2. gerade deshalb unser Zugang leider sehr eingeschränkt ist.
 
 
+<!-- .slide: data-background-iframe="https://ht.ac.uk/category/#id=39622" -->
+
+Notes: The TC mapping is not easily searchable in the web interface, but it is visible by using the detail view of a full HTE category.
+While in theory the TC set of categories seems like a good fit for our project, in practice I found it to be _weird_. We will see some of the weirdness
+when I give you a quick glance on what we currently have.
+
+
+> Our aim was to produce a folk taxonomy, informed by what Hallig and von Wartburg describe as ‘naïve realism’, setting forth “the intelligent average individual’s view of the world, based on pre-scientific general concepts made available by language”
+
+> In all cases, it must be stressed that we are classifying the language used to discuss a topic, not the subject-matter itself
+
+(Source: https://ht.ac.uk/classification/)
+
+
+>  In some cases, the sheer weight of vocabulary simply overwhelmed the taxonomy, with a category that is properly a subcategory rising in status because its degree of lexicalization reflected its considerable degree of importance to speakers of the language. Thus, for example, historic and important sports, such as cricket, football, or baseball, have their own categories and arrays of subcategories.
+
+
 ### Access to the HTE
 
 * not Open Access  <!-- .element class="fragment"  -->
 * no API (except crawling the website)  <!-- .element class="fragment"  -->
 * agreement on re-use, BUT…  <!-- .element class="fragment"  -->
+
 
 
 ### Access to the HTE (cont.)
@@ -87,14 +105,6 @@ Notes: Schon von Beginn an wurde entschieden, dass der TRM nicht bei Null anfang
   * thematic category set (TC), e.g. 'AD01': "Science of mankind" (4,033 concepts)
   * TC is supposed to be used for human queries and visualizations; it is not as readily accessible via the website
 * we only have access to the TC set!  <!-- .element class="fragment"  -->
-
-
-<!-- .slide: data-background-iframe="https://ht.ac.uk/category/#id=39622" -->
-
-Notes: The TC mapping is not easily searchable in the web interface, but it is visible by using the detail view of a full HTE category.
-While in theory the TC set of categories seems like a good fit for our project, in practice I found it to be _weird_. We will see some of the weirdness
-when I give you a quick glance on what we currently have.
-
 
 
 ## Current State
@@ -156,9 +166,9 @@ Drittens: Der Thesaurus soll Dinge erschließen, also auffindbar und nutzbar mac
 
 ## The Way Forward
 
-* SIG "TRM"!
-* Modelling Case Studies
-* Use Case Studies
+* ThIF?? MIF?? KIF?  <!-- .element class="fragment"  -->
+* Modelling Case Studies  <!-- .element class="fragment"  -->
+* Use Case Studies  <!-- .element class="fragment"  -->
 
 Notes: Wie ich schon erwähnt habe: über die angemessene Struktur, die notwendigen Eigenschaften, und letztendlich den Inhalt des TRM können wir nur über die Kompetenz der Unterprojekte angemessen entscheiden. 
 
